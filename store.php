@@ -11,8 +11,6 @@
                 <h4 class="text-center py-3">Productos destacados</h4>
                 <div class="scroll-view">
 
-
-
                     <div class="col-4 item-store mx-auto p-0 m-0" id="item1">
                         <div class="front" id="front">
                             <img class="img-fluid" src="img/wiskas.jpg" alt="" id="img1">
