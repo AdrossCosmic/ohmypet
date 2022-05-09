@@ -37,6 +37,9 @@ body::-webkit-scrollbar {
 }
 
 
+
+
+
 .header {
     height: 20vh;
     background: #fff;
@@ -122,7 +125,55 @@ h2{
 }
 
 
+.addProducts {
+    z-index: 2;
+    position: fixed;
+    margin: 30% 0 2% 2%; 
+    transition: 0.2s;
+}
 
+.addProducts i:hover{
+    cursor: pointer;
+    -webkit-box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
+    -moz-box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
+    box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
+
+}
+
+.input{
+    height: 50px;
+    padding: 5px 15px;
+    margin: 10px auto;
+    border: none;
+    border-bottom: solid 3px var(--color3);
+    transition: 0.5s;
+    outline: #00000000;
+}
+
+.labelRadioInput{
+    z-index: 2;
+    background: var(--opaque);
+    padding: 5px 10px;
+    border: solid 2px #00000000;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+.radioInput{
+    z-index: 0 !important;
+    position: absolute;
+    display: none;
+}
+
+.selected{
+    border-color: var(--color1);
+    background: var(--color2);
+
+}
+
+.input:focus{
+    border-color: var(--color5) !important;
+}
 
 .scroll-view{
     width: 100%;
@@ -147,7 +198,7 @@ h2{
 
 .item-store {
     width: 14rem;
-    height: 25rem;
+    height: 22rem;
     margin: 10px 15px !important;
     border: var(--opaque) solid 2px;
     border-radius: 10px 10px 0 0;
@@ -177,11 +228,11 @@ h2{
     backface-visibility: hidden;
 }
 
-.front{
-    width: 100%;
-}
 
 .back{
+    display: flex;
+    flex-direction: column !important;
+    justify-content: center;
     -webkit-transform: rotateY(180deg);
 	transform: rotateY(180deg);
 }
