@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/style.php">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400&family=Rancho&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
 

@@ -8,10 +8,10 @@
     --primary: #2A2A2A;
     --secondary: #363636; 
     --opaque: #D9D9D9;
-    --color1: #9698e1;
-    --color2: #93c5ed;
-    --color3: #c193ed; 
-    --color4: #ED93E3; 
+    --color1: #96F7B2;
+    --color2: #FECB84;
+    --color3: #E1ADDF; 
+    --color4: #70E5DD; 
     --color5: #EDA29F; 
     
 }
@@ -21,7 +21,23 @@
     marging: 0;
     list-style: none;
     text-decoration: none;
-    font-family: 'Mali', cursive;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.bg-color1 {
+    background-color: var(--color1);
+}
+.bg-color2 {
+    background-color: var(--color2);
+}
+.bg-color3 {
+    background-color: var(--color3);
+}
+.bg-color4 {
+    background-color: var(--color4);
+}
+.bg-color5 {
+    background-color: var(--color5);
 }
 
 body {
@@ -37,7 +53,9 @@ body::-webkit-scrollbar {
 }
 
 
-
+h5, h4, h3, h2, h1 {
+    font-family: 'Josefin Sans', sans-serif;
+}
 
 
 .header {
@@ -196,6 +214,8 @@ h2{
     border-radius: 20px;
 }
 
+
+
 .item-store {
     width: 14rem;
     height: 22rem;
@@ -226,6 +246,7 @@ h2{
 	position: absolute;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    border-radius: 10px 10px 0 0;
 }
 
 
@@ -248,9 +269,6 @@ h2{
     transition: 0.2s;
 }
 
-.item-store:nth-child(2n+1){
-    background: var(--color4);
-}
 
 .button{
     color: black;

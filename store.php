@@ -3,13 +3,14 @@
 <head>
     <title>Tienda</title>
 
-    <?php include("header.php");?>
+    <?php session_start(); include("header.php");?>
 
     <div class="addProducts">
         <i class="fa-solid fa-circle-plus fa-4x" data-bs-toggle="modal" data-bs-target="#addProduct"></i>
     </div>
 
     <!-- Modal -->
+
     <div class="modal fade" id="addProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -17,10 +18,10 @@
                     <h5 class="modal-title" id="exampleModalLabel">Agregar Producto</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="php/addProduct.php" method="POST">
+                <form action="php/addProduct.php" method="POST" enctype="multipart/form-data">
                     <div class="modal-body col-12">
                         <input class="col-12" type="file" name="img" placeholder="Agregue una imagen de su producto">
-                        <input class=" col-12 input" type="text" name="name" placeholder="Agergar el nombre de tu producto">
+                        <input class="col-12 input" type="text" name="title" placeholder="Agergar el nombre de tu producto">
                         <textarea class="col-12 input" name="description" placeholder="Agregar una breve descripción de su producto" cols="10" rows="5"></textarea>
                         <input class="col-12 input" type="text" name="price" placeholder="Agregue el costo de su producto por unidad" id="priceInput">
                         <h5 class="mt-3">Seleccione la categoría de su producto</h5>
@@ -45,25 +46,23 @@
                         <h5 class="mt-4">¿A quién está enfocado su producto?</h5>
                         <div class="row col-12">
                             <div class="col-2 me-2">
-                                <input class="radioInput" type="radio" name="pet" value="Gatos" id="pet1">
+                                <input class="radioInput" type="radio" name="pet" value="Gato" id="pet1">
                                 <label class="labelRadioInput" for="pet1" id="labelPet1">Gatos</label>
                             </div>
                             <div class="col-2">
-                                <input class="radioInput" type="radio" name="pet" value="Perros" id="pet2">
+                                <input class="radioInput" type="radio" name="pet" value="Perro" id="pet2">
                                 <label class="labelRadioInput" for="pet2" id="labelPet2">Perros</label>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary">Agregar</button>
+                        <input type="submit" name="send" value="Agregar">
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
-
 
     <section class="col-12 store">
         <div class="items-container ">
@@ -74,7 +73,7 @@
                 <?php ?>
 
                     <div class="col-4 item-store mx-auto p-0 m-0" id="item1">
-                        <div class="front" id="front">
+                        <div class="front bg-color1" id="front">
                             <img class="img-fluid" src="img/wiskas.jpg" alt="" id="img1">
                             <div class="ms-3 mt-3">
                                 <h4>Wiskas 9kg</h4>
@@ -97,6 +96,7 @@
                             </div>
                         </div>
                     </div>
+
 
 
                 </div>
