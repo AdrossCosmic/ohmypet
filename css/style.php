@@ -8,9 +8,9 @@
     --primary: #2A2A2A;
     --secondary: #363636; 
     --opaque: #D9D9D9;
-    --color1: #96F7B2;
+    --color1: #E1ADDF; 
     --color2: #FECB84;
-    --color3: #E1ADDF; 
+    --color3: #96F7B2;
     --color4: #70E5DD; 
     --color5: #EDA29F; 
     
@@ -233,10 +233,25 @@ h2{
 
 .item-store:hover{
     cursor: pointer;
-    border: var(--color1) solid 2px;
     -webkit-box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
     -moz-box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
     box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
+}
+
+.Accesorios:hover{
+    border: var(--color1) solid 2px;
+}
+
+.Alimento:hover{
+    border: var(--color2) solid 2px;
+}
+
+.Deporte{
+    border: var(--color3) solid 2px;
+}
+
+.Salud{
+    border: var(--color4) solid 2px;
 }
 
 
