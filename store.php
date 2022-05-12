@@ -9,6 +9,20 @@
         include("header.php"); 
         require('php/db.php');
 
+        // Buscar productos
+        if(isset($_POST['makeSearch'])){
+
+            if (!empty($_POST['search'])){
+
+                $search = $_POST['search'];
+    
+                $requestSearch = "SELECT * FROM products where title like '%$search%' or category like '%$search%' or pet like '%$search%'";
+                $makeSearch = $pdo->prepare($requestSearch);
+                $makeSearch->execute();
+                $searchResult = $makeSearch->fetchAll();
+            }
+        }
+
         // Variable para almacenar posteriormente la url actualizada 
         $updateRute = "";
 
@@ -222,27 +236,33 @@
                             break;
                     } ?>
 
-                        <div class="col-4 item-store mx-auto p-0 m-0 <?php echo $category?>" id="item<?php echo $id?>">
+                        <div class="col-4 item-store mx-auto <?php echo $category?>" id="item<?php echo $id?>">
                             <div class="front bg-color<?php echo $color;?>" id="front<?php echo $id?>">
                                 <img class="img-fluid" src="php/<?php echo $img;?>" alt="" id="img<?php echo $id?>">
-                                <div class="ms-3 me-1 mt-3">
-                                    <h5><?php echo $title;?></h5>
-                                    <h5><?php echo $price;?>/u</h5>
-                                </div>
-                                <div class="row ms-2 col-12 mt-3">
-                                    <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc<?php echo $id?>"></i>
-                                    <p class="col-10 my-0"><?php echo $available;?></p>
+                                <div class="d-flex flex-column justify-content-between" style="height: 35%;">
+                                    <div class="mx-3 mt-2">
+                                        <h5 class="cardTitle"><?php echo $title;?></h5>
+                                        <h5><?php echo $price;?>/u</h5>
+                                    </div>
+                                    <div class="row ms-2 col-12">
+                                        <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc<?php echo $id?>"></i>
+                                        <p class="col-10 my-0"><?php echo $available;?></p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="back" id="back<?php echo $id?>">
-                                <div class="row ms-2 col-12 ">
+                                <div class="mx-4">
+                                    <h5><?php echo $title;?></h5>
+                                    <h5><?php echo $price;?>/u</h5>
+                                </div>
+                                <div class="row mt-2 ms-2 col-12">
                                     <i class="col-1 my-1 fa-solid fa-cat icon" id="iconoa<?php echo $id?>"></i>
                                     <p class="col-10 my-0">Para <?php echo $pet;?>s</p>
                                     <i class="col-1 my-1 fa-solid fa-fish icon" id="iconob<?php echo $id?>"></i>
                                     <p class="col-10 my-0"><?php echo $category?></p>
                                 </div>
-                                <div class="col-12 mx-auto my-5">
-                                    <a class="mx-5 button" href="">Add to cart</a>
+                                <div class="col-12 mx-auto my-4">
+                                    <a class="mx-5 button button-color<?php echo $color;?>" href="">Add to cart</a>
                                 </div>
                             </div>
                         </div> 
@@ -251,19 +271,108 @@
 
                 </div>
             </div>
-            <div class="my-5 list-view row justify-content-center col-12">
-                <div class="my-2 mx-auto d-flex justify-content-center col-12">
-                    <a class="mx-2 " href="store.php?pet=1&"><i class="fa-solid fa-dog me-2"></i>Para perros</a>
-                    <a class="mx-2 " href="store.php?pet=2&"><i class="fa-solid fa-cat me-2"></i>Para gatos</a>
+            <div class="my-5 justify-content-center col-12">
+                <div class="my-3 mx-auto d-flex justify-content-center col-12">
+                    <a class="mx-2 button button-color5" href="store.php?pet=1&#items"><i class="fa-solid fa-dog me-2"></i>Para perros</a>
+                    <a class="mx-2 button button-color5" href="store.php?pet=2&#items"><i class="fa-solid fa-cat me-2"></i>Para gatos</a>
                 </div>
-                <div class="my-2 mx-auto d-flex justify-content-center col-12">
-                    <a class="mx-2 btn btn-dark" href="store.php">Todo</a>
-                    <a class="mx-2 btn btn-primary" href="<?php if (!empty($updateRute)){ echo $updateRute ."option=1";} else {echo "store.php?option=1";}?>">Accesorios</a>
-                    <a class="mx-2 btn btn-warning" href="<?php if (!empty($updateRute)){ echo $updateRute ."option=2";} else {echo "store.php?option=2";}?>">Alimento</a>
-                    <a class="mx-2 btn btn-success" href="<?php if (!empty($updateRute)){ echo $updateRute ."option=3";} else {echo "store.php?option=3";}?>">Deporte</a>
-                    <a class="mx-2 btn btn-danger" href="<?php if (!empty($updateRute)){ echo $updateRute ."option=4";} else {echo "store.php?option=4";}?>">Salud</a>
+                <div class="my-3 mx-auto d-flex justify-content-center col-12">
+                    <a class="mx-2 button button-primary" href="store.php#items">Todo</a>
+                    <a class="mx-2 button button-color1" href="<?php if (!empty($updateRute)){ echo $updateRute ."option=1";} else {echo "store.php?option=1";}?>#items">Accesorios</a>
+                    <a class="mx-2 button button-color2" href="<?php if (!empty($updateRute)){ echo $updateRute ."option=2";} else {echo "store.php?option=2";}?>#items">Alimento</a>
+                    <a class="mx-2 button button-color3" href="<?php if (!empty($updateRute)){ echo $updateRute ."option=3";} else {echo "store.php?option=3";}?>#items">Deporte</a>
+                    <a class="mx-2 button button-color4" href="<?php if (!empty($updateRute)){ echo $updateRute ."option=4";} else {echo "store.php?option=4";}?>#items">Salud</a>
                 </div>
-                <div class="row col-10 mt-3 mx-auto">
+                <div class="my-4 mx-auto d-flex justify-content-center col-12">
+                    <form action="store.php#search" method="POST">
+                        <input class="searchInput" type="text" name="search" placehoder="¿Qué estás buscando?">
+                        <input class="button button-color5 " type="submit" name="makeSearch" value="Buscar">
+                    </form>    
+                </div>
+                <div class="row col-10 mx-auto justify-content-center mt-3 m-0 <?php if  (isset($searchResult)){ echo "search";}?>" id="search">
+
+                    <?php 
+                    
+                        if  (isset($searchResult)){
+
+                            echo '<h4 class="mt-4 mx-auto text-center">Resultados de la búsqueda:</h4>';
+
+                            foreach( $searchResult as $i):
+
+                                // Variables
+                                $id = $i['id'];
+                                $img = $i['img'];
+                                $title = $i['title'];
+                                $price = $i['price'];
+                                $pet = $i['pet'];
+                                $category = $i['category'];
+                                $color = 0;
+                                
+                                if($i['pet'] === "Gato"){ $pet = "gato";} else { $pet = "perro";}
+                                if($i['available'] === 1){ $available = "Disponible";} else { $available = "Agotado";}
+                                if($i['descrip'] != "empty"){ $description = $i['descrip'];} else { $description = "";}
+                                
+                                // Definir color del producto   
+                                switch ($i['category']){
+                                    case "Accesorios":
+                                        $color = 1;
+                                        break;
+        
+                                    case "Alimento":
+                                        $color = 2;
+                                        break;
+        
+                                    case "Deporte":
+                                        $color = 3;
+                                        break;
+        
+                                    case "Salud":
+                                        $color = 4;
+                                        break;
+        
+                                    case "Default":
+                                        $color = 0;
+                                        break;
+                                }
+                                
+                            ?>
+                                
+                                <div class="col-4 item-store mx-auto <?php echo $category?>" id="item<?php echo $id?>">
+                                    <div class="front bg-color<?php echo $color;?>" id="front<?php echo $id?>">
+                                        <img class="img-fluid" src="php/<?php echo $img;?>" alt="" id="img<?php echo $id?>">
+                                        <div class="d-flex flex-column justify-content-between" style="height: 35%;">
+                                            <div class="mx-3 mt-2">
+                                                <h5 class="cardTitle"><?php echo $title;?></h5>
+                                                <h5><?php echo $price;?>/u</h5>
+                                            </div>
+                                            <div class="row ms-2 col-12">
+                                                <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc<?php echo $id?>"></i>
+                                                <p class="col-10 my-0"><?php echo $available;?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="back" id="back<?php echo $id?>">
+                                        <div class="mx-4">
+                                            <h5><?php echo $title;?></h5>
+                                            <h5><?php echo $price;?>/u</h5>
+                                        </div>
+                                        <div class="row mt-2 ms-2 col-12">
+                                            <i class="col-1 my-1 fa-solid fa-cat icon" id="iconoa<?php echo $id?>"></i>
+                                            <p class="col-10 my-0">Para <?php echo $pet;?>s</p>
+                                            <i class="col-1 my-1 fa-solid fa-fish icon" id="iconob<?php echo $id?>"></i>
+                                            <p class="col-10 my-0"><?php echo $category?></p>
+                                        </div>
+                                        <div class="col-12 mx-auto my-4">
+                                            <a class="mx-5 button button-color<?php echo $color;?>" href="">Add to cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                    <?php endforeach;}?>
+
+                </div>
+
+                <div class="row col-12 justify-content-center mt-3 m-0 " id="items">
 
                     <?php 
                     
@@ -307,27 +416,33 @@
                         
                     ?>
                         
-                        <div class="col-4 item-store mx-auto p-0 m-0 <?php echo $category?>" id="item<?php echo $id?>">
+                        <div class="col-4 item-store mx-auto <?php echo $category?>" id="item<?php echo $id?>">
                             <div class="front bg-color<?php echo $color;?>" id="front<?php echo $id?>">
                                 <img class="img-fluid" src="php/<?php echo $img;?>" alt="" id="img<?php echo $id?>">
-                                <div class="ms-3 me-1 mt-3">
-                                    <h5><?php echo $title;?></h5>
-                                    <h5><?php echo $price;?>/u</h5>
-                                </div>
-                                <div class="row ms-2 col-12 mt-3">
-                                    <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc<?php echo $id?>"></i>
-                                    <p class="col-10 my-0"><?php echo $available;?></p>
+                                <div class="d-flex flex-column justify-content-between" style="height: 35%;">
+                                    <div class="mx-3 mt-2">
+                                        <h5 class="cardTitle"><?php echo $title;?></h5>
+                                        <h5><?php echo $price;?>/u</h5>
+                                    </div>
+                                    <div class="row ms-2 col-12">
+                                        <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc<?php echo $id?>"></i>
+                                        <p class="col-10 my-0"><?php echo $available;?></p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="back" id="back<?php echo $id?>">
-                                <div class="row ms-2 col-12 ">
+                                <div class="mx-4">
+                                    <h5><?php echo $title;?></h5>
+                                    <h5><?php echo $price;?>/u</h5>
+                                </div>
+                                <div class="row mt-2 ms-2 col-12">
                                     <i class="col-1 my-1 fa-solid fa-cat icon" id="iconoa<?php echo $id?>"></i>
                                     <p class="col-10 my-0">Para <?php echo $pet;?>s</p>
                                     <i class="col-1 my-1 fa-solid fa-fish icon" id="iconob<?php echo $id?>"></i>
                                     <p class="col-10 my-0"><?php echo $category?></p>
                                 </div>
-                                <div class="col-12 mx-auto my-5">
-                                    <a class="mx-5 button" href="">Add to cart</a>
+                                <div class="col-12 mx-auto my-4">
+                                    <a class="mx-5 button button-color<?php echo $color;?>" href="">Add to cart</a>
                                 </div>
                             </div>
                         </div>
@@ -375,103 +490,5 @@
             </div>
         </div>
     </section>
-
-
-
-    <!-- <script>
-                    
-                                var carta = document.getElementById('item<?php echo $id?>');
-                                var front = document.getElementById('front<?php echo $id?>');
-                                var back = document.getElementById('back<?php echo $id?>');
-                                var img = document.getElementById('img<?php echo $id?>');
-                                var a1 = document.getElementById('iconoa<?php echo $id?>');
-                                var b1 = document.getElementById('iconob<?php echo $id?>');
-                                var c1 = document.getElementById('iconoc<?php echo $id?>');
-                    
-                                front.addEventListener('click', function(){
-                                    carta.style.transform = "rotateY(180deg)";
-                                    console.log(<?php echo $id?>);
-                                });
-                                
-                                back.addEventListener('click', function(){
-                                    carta.style.transform = "rotateY(0deg)";
-                                    console.log(<?php echo $id?>);
-                                });
-                    
-                                carta.addEventListener('mouseenter', function(){
-                                    img.style.padding = "8%";
-                                    a1.classList.add('text-light');
-                                    b1.classList.add('text-light');
-                                    c1.classList.add('text-light');
-                                    console.log(<?php echo $id?>);
-                                });
-                                carta.addEventListener('mouseleave', function(){
-                                    img.style.padding = "10%";
-                                    a1.classList.remove('text-light');
-                                    b1.classList.remove('text-light');
-                                    c1.classList.remove('text-light');
-                                    console.log(<?php echo $id?>);
-                                });
-                    
-                            </script> -->
-    <!-- <section class="col-12 store">
-        <div class="row col-12 items-container">
-            <div class="col-4 item-store mx-auto p-0 m-0" id="item1">
-                <div class="front" id="front">
-                    <img class="img-fluid" src="img/wiskas.jpg" alt="" id="img1">
-                    <div class="ms-3 mt-3">
-                        <h4>Wiskas 9kg</h4>
-                        <h5>150.000</h5>
-                    </div>
-                    <div class="row ms-2 col-12 mt-3">
-                        <i class="col-1 my-1 fa-solid fa-cat icon" id="iconoa1"></i>
-                        <p class="col-10 my-0">Para gatos</p>
-                        <i class="col-1 my-1 fa-solid fa-fish icon" id="iconob1"></i>
-                        <p class="col-10 my-0">Alimento</p>
-                        <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc1"></i>
-                        <p class="col-10 my-0" >Disponible</p>
-                    </div>
-                </div>
-                <div class="back" id="back">
-                    <div class="col-12 mx-auto my-5">
-                        <a class="mx-5 button" href="">Add to cart</a>
-                    </div>
-                </div>
-            </div>
-
-            <script>
-
-                var carta = document.getElementById('item1');
-                var front = document.getElementById('front');
-                var back = document.getElementById('back');
-                var img = document.getElementById('img1');
-                var a1 = document.getElementById('iconoa1');
-                var b1 = document.getElementById('iconob1');
-                var c1 = document.getElementById('iconoc1');
-
-                front.addEventListener('click', function(){
-                    carta.style.transform = "rotateY(180deg)";
-                });
-                
-                back.addEventListener('click', function(){
-                    carta.style.transform = "rotateY(0deg)";
-                });
-
-                carta.addEventListener('mouseenter', function(){
-                    img.style.padding = "8%";
-                    a1.classList.add('text-light');
-                    b1.classList.add('text-light');
-                    c1.classList.add('text-light');
-                });
-                carta.addEventListener('mouseleave', function(){
-                    img.style.padding = "10%";
-                    a1.classList.remove('text-light');
-                    b1.classList.remove('text-light');
-                    c1.classList.remove('text-light');
-                });
-
-            </script>
-        </div>
-    </section> -->
 
     <?php include("footer.php");?>
