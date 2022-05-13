@@ -9,6 +9,19 @@
         include("header.php"); 
         require('php/db.php');
 
+
+        // Selecciona el último id de la tabla, para usarlo posteriormente con js
+        $requestLastElement = "SELECT id FROM products ORDER BY id DESC LIMIT 1";
+        $consultLastElement = $pdo->prepare($requestLastElement);
+        $consultLastElement->execute();
+        $lastElement = $consultLastElement->fetch();
+
+        // Selecciona el primer id de la tabla, para usarlo posteriormente con js
+        $requestFirstElement = "SELECT id FROM products LIMIT 1";
+        $consultFirstElement = $pdo->prepare($requestFirstElement);
+        $consultFirstElement->execute();
+        $firstElement = $consultFirstElement->fetch();
+
         // Buscar productos
         if(isset($_POST['makeSearch'])){
 
@@ -28,12 +41,6 @@
 
         // Petición al servidor por defecto
         $requestProducts = "SELECT * FROM products";
-
-        // Consulta el número de columnas en la base de datos 
-        $requestNumberRows = "SELECT COUNT(*) FROM products";
-        $getNumberRows = $pdo->prepare($requestNumberRows);
-        $getNumberRows->execute();
-        $numberRows = $getNumberRows->fetchColumn();
 
         // La variable $i almacena la petición evaluada previamente, el valor $x (where o and) evalúa qué cambios se añadirán a la petición
         // La función evalúa qué items mostrar según la categoría seleccionada.
@@ -116,7 +123,7 @@
 
             }
 
-            // Comsultar productos
+            // Consultar productos
     
             $sendRequestProducts = $pdo->prepare($requestProducts);
             $sendRequestProducts->execute();
@@ -239,6 +246,8 @@
                             break;
                     } ?>
 
+                    
+
                         <div class="col-4 item-store mx-auto <?php echo $category?>" id="item1.<?php echo $id?>">
                             <div class="front bg-color<?php echo $color;?>" id="front1.<?php echo $id?>">
                                 <img class="img-fluid" src="php/<?php echo $img;?>" alt="" id="img1.<?php echo $id?>">
@@ -267,6 +276,16 @@
                                 <div class="col-12 mx-auto my-4">
                                     <a class="mx-5 button button-color<?php echo $color;?>" href="">Add to cart</a>
                                 </div>
+
+                                <?php ?>
+                                <div class="row mt-2 ms-0 col-12">
+                                   <a class="col-4 mx-auto text-center" href="php/deleteProduct.php?id=<?php echo $id .'&img=' .$img;?>" ><i class="fa-solid fa-trash fa-2x"></i></a>
+                                   <a class="col-5 mx-auto text-center" href="" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fa-solid fa-pen-to-square fa-2x"></i></a>
+                                </div>
+                                
+                                
+
+                                <?php ?>
                             </div>
                         </div> 
 
@@ -466,6 +485,13 @@
 
     <script>
 
+        // *** Funcionamiento ***
+
+        /* 
+            * Para evitar que el script se rompa, este empieza a contar directamente desde el primer id de la tabla, 
+            y se ejecuta X cantidad de veces según el id del útlimo elemento de la misma. 
+        */
+    
         function addAnimation(x, i){
                 var carta = document.getElementById('item' + x + "." + i);
                 var thatExist = !!document.getElementById('item' + x + "." + i);
@@ -506,14 +532,14 @@
         var allSection = !!document.getElementsByClassName('item3')
         ;
         // Almacena la cantidad de columnas que existen en la base de datos
-        var allItems = <?php echo $numberRows;?>;
-        var x = 1; 
-        console.log(x);
+        var last = <?php echo $lastElement['id'];?>;
+        var first = <?php echo $firstElement['id'];?>; 
+        console.log(first);
 
         // Ejecuta la función addAnimation por cada item de la consulta
-        for (var i = 1; i <= allItems; i++) {
+        for (var i = 1; i <= last; i++) {
             
-            if (x == i){
+            if (first == i){
                 
                 // Ejecuta la función si se ha realizado una busqueda
                 if (searchSection == true){
@@ -527,7 +553,7 @@
                 if (allSection == true){
                     addAnimation(3,i);
                 }
-                x = x+1;
+                first = first+1;
             }
         }
         

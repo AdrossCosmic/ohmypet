@@ -241,7 +241,7 @@ h2{
 .item-store {
     width: 14rem;
     height: 22rem;
-    margin: 10px 15px !important;
+    margin: 10px 15px 40px!important;
     border: var(--opaque) solid 2px;
     border-radius: 10px 10px 0 0;
     background: white;
