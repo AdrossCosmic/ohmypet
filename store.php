@@ -29,7 +29,7 @@
 
                 $search = $_POST['search'];
     
-                $requestSearch = "SELECT * FROM products where title like '%$search%' or category like '%$search%' or pet like '%$search%'";
+                $requestSearch = "SELECT * FROM products where title like '%$search%' or category like '%$search%' or pet like '%$search%' or keywords like '%$search%'";
                 $makeSearch = $pdo->prepare($requestSearch);
                 $makeSearch->execute();
                 $searchResult = $makeSearch->fetchAll();
@@ -150,8 +150,9 @@
                     <div class="modal-body col-12">
                         <input class="col-12" type="file" name="img" placeholder="Agregue una imagen de su producto">
                         <input class="col-12 input" type="text" name="title" placeholder="Agergar el nombre de tu producto">
-                        <textarea class="col-12 input" name="description" placeholder="Agregar una breve descripción de su producto" cols="10" rows="5"></textarea>
-                        <input class="col-12 input" type="text" name="price" placeholder="Agregue el costo de su producto por unidad" id="priceInput">
+                        <input class="col-12 input" type="text" name="keywords" placeholder="Agregue palabras claves facilitar la busqueda de su producto">
+                        <input class="col-12 input" type="number" name="price" placeholder="Agregue el costo de su producto por unidad" id="priceInput">
+                        <input class="col-12 input" type="number" name="units" placeholder="Unidades disponibles">
                         <h5 class="mt-3">Seleccione la categoría de su producto</h5>
                         <div class="row col-12">
                             <div class="col-2 me-4">
@@ -217,11 +218,11 @@
                     $price = $j['price'];
                     $pet = $j['pet'];
                     $category = $j['category'];
+                    $units = $j['units'];
                     $color = 0;
                     
                     if($j['pet'] === "Gato"){ $pet = "gato";} else { $pet = "perro";}
-                    if($j['available'] === 1){ $available = "Disponible";} else { $available = "Agotado";}
-                    if($j['descrip'] != "empty"){ $description = $j['descrip'];} else { $description = "";}
+                    if($j['units'] > 0){ $available = "Disponible";} else { $available = "Agotado";}
                     
                     // Definir color del producto   
                     switch ($j['category']){
@@ -257,8 +258,8 @@
                                         <h5><?php echo $price;?>/u</h5>
                                     </div>
                                     <div class="row ms-2 col-12">
-                                        <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc1.<?php echo $id?>"></i>
-                                        <p class="col-10 my-0"><?php echo $available;?></p>
+                                        <i class="col-1 my-1 fa-solid fa-cart-plus" id="iconoc1.<?php echo $id?>"></i>
+                                        <p class="col-10 my-0"><?php echo $available ." (" .$units .")";?></p>
                                     </div>
                                 </div>
                             </div>
@@ -268,38 +269,41 @@
                                     <h5><?php echo $price;?>/u</h5>
                                 </div>
                                 <div class="row mt-2 ms-2 col-12">
-                                    <i class="col-1 my-1 fa-solid fa-cat icon" id="iconoa1.<?php echo $id?>"></i>
+                                    <i class="col-1 my-1 fa-solid fa-cat" id="iconoa1.<?php echo $id?>"></i>
                                     <p class="col-10 my-0">Para <?php echo $pet;?>s</p>
-                                    <i class="col-1 my-1 fa-solid fa-fish icon" id="iconob1.<?php echo $id?>"></i>
+                                    <i class="col-1 my-1 fa-solid fa-fish" id="iconob1.<?php echo $id?>"></i>
                                     <p class="col-10 my-0"><?php echo $category?></p>
                                 </div>
-                                <div class="col-12 mx-auto my-4">
-                                    <a class="mx-5 button button-color<?php echo $color;?>" href="">Add to cart</a>
-                                </div>
+
+                                <?php if ($available === "Disponible") {?>
+                                    <div class="row col-12 mx-auto my-4">
+                                        <a class="col-6 mx-auto text-center button button-color<?php echo $color;?>" href="">Add to cart</a>
+                                    </div>
+                                <?php } ?>
 
                                 <?php ?>
                                 <div class="row mt-2 ms-0 col-12">
-                                   <a class="col-4 mx-auto text-center" href="php/deleteProduct.php?id=<?php echo $id .'&img=' .$img;?>" ><i class="fa-solid fa-trash fa-2x"></i></a>
-                                   <a class="col-5 mx-auto text-center" href="" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fa-solid fa-pen-to-square fa-2x"></i></a>
+                                    <a class="col-4 mx-auto text-center button button-color5" href="php/deleteProduct.php?id=<?php echo $id .'&img=' .$img;?>" ><i class="fa-solid fa-trash fa-2x"></i> Eliminar</a>
                                 </div>
                                 
-                                
-
                                 <?php ?>
+
                             </div>
                         </div> 
+                    
+                        <?php endforeach;?>
 
-                    <?php endforeach;?>
-
+                    </div>
                 </div>
             </div>
+
             <div class="my-5 justify-content-center col-12">
                 <div class="my-3 mx-auto d-flex justify-content-center col-12">
                     <a class="mx-2 button button-color5" href="store.php?pet=1&#items"><i class="fa-solid fa-dog me-2"></i>Para perros</a>
                     <a class="mx-2 button button-color5" href="store.php?pet=2&#items"><i class="fa-solid fa-cat me-2"></i>Para gatos</a>
                 </div>
                 <div class="my-3 mx-auto d-flex justify-content-center col-12">
-                    <a class="mx-2 button button-primary" href="store.php#items">Todo</a>
+                    <a class="mx-2 button button-black" href="store.php#items">Todo</a>
                     <a class="mx-2 button button-color1" href="<?php if (!empty($updateRute)){ echo $updateRute ."option=1";} else {echo "store.php?option=1";}?>#items">Accesorios</a>
                     <a class="mx-2 button button-color2" href="<?php if (!empty($updateRute)){ echo $updateRute ."option=2";} else {echo "store.php?option=2";}?>#items">Alimento</a>
                     <a class="mx-2 button button-color3" href="<?php if (!empty($updateRute)){ echo $updateRute ."option=3";} else {echo "store.php?option=3";}?>#items">Deporte</a>
@@ -314,7 +318,7 @@
 
                 <!-- Sección: "Búsqueda" -->
 
-                <div class="row col-10 mx-auto justify-content-center mt-3 m-0 <?php if  (isset($searchResult)){ echo "search";}?>" id="search">
+                <div class="row col-10 mx-auto justify-content-center mt-3 m-0 bg-light <?php if  (isset($searchResult)){ echo "search";}?>" id="search">
 
                     <?php 
                     
@@ -334,8 +338,7 @@
                                 $color = 0;
                                 
                                 if($i['pet'] === "Gato"){ $pet = "gato";} else { $pet = "perro";}
-                                if($i['available'] === 1){ $available = "Disponible";} else { $available = "Agotado";}
-                                if($i['descrip'] != "empty"){ $description = $i['descrip'];} else { $description = "";}
+                                if($i['units'] > 0){ $available = "Disponible";} else { $available = "Agotado";}
                                 
                                 // Definir color del producto   
                                 switch ($i['category']){
@@ -371,7 +374,7 @@
                                                 <h5><?php echo $price;?>/u</h5>
                                             </div>
                                             <div class="row ms-2 col-12">
-                                                <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc2.<?php echo $id?>"></i>
+                                                <i class="col-1 my-1 fa-solid fa-cart-plus" id="iconoc2.<?php echo $id?>"></i>
                                                 <p class="col-10 my-0"><?php echo $available;?></p>
                                             </div>
                                         </div>
@@ -382,9 +385,9 @@
                                             <h5><?php echo $price;?>/u</h5>
                                         </div>
                                         <div class="row mt-2 ms-2 col-12">
-                                            <i class="col-1 my-1 fa-solid fa-cat icon" id="iconoa2.<?php echo $id?>"></i>
+                                            <i class="col-1 my-1 fa-solid fa-cat" id="iconoa2.<?php echo $id?>"></i>
                                             <p class="col-10 my-0">Para <?php echo $pet;?>s</p>
-                                            <i class="col-1 my-1 fa-solid fa-fish icon" id="iconob2.<?php echo $id?>"></i>
+                                            <i class="col-1 my-1 fa-solid fa-fish" id="iconob2.<?php echo $id?>"></i>
                                             <p class="col-10 my-0"><?php echo $category?></p>
                                         </div>
                                         <div class="col-12 mx-auto my-4">
@@ -415,8 +418,7 @@
                         $color = 0;
                         
                         if($i['pet'] === "Gato"){ $pet = "gato";} else { $pet = "perro";}
-                        if($i['available'] === 1){ $available = "Disponible";} else { $available = "Agotado";}
-                        if($i['descrip'] != "empty"){ $description = $i['descrip'];} else { $description = "";}
+                        if($i['units'] > 0){ $available = "Disponible";} else { $available = "Agotado";}
                         
                         // Definir color del producto   
                         switch ($i['category']){
@@ -452,7 +454,7 @@
                                         <h5><?php echo $price;?>/u</h5>
                                     </div>
                                     <div class="row ms-2 col-12">
-                                        <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc3.<?php echo $id?>"></i>
+                                        <i class="col-1 my-1 fa-solid fa-cart-plus" id="iconoc3.<?php echo $id?>"></i>
                                         <p class="col-10 my-0"><?php echo $available;?></p>
                                     </div>
                                 </div>
@@ -463,9 +465,9 @@
                                     <h5><?php echo $price;?>/u</h5>
                                 </div>
                                 <div class="row mt-2 ms-2 col-12">
-                                    <i class="col-1 my-1 fa-solid fa-cat icon" id="iconoa3.<?php echo $id?>"></i>
+                                    <i class="col-1 my-1 fa-solid fa-cat" id="iconoa3.<?php echo $id?>"></i>
                                     <p class="col-10 my-0">Para <?php echo $pet;?>s</p>
-                                    <i class="col-1 my-1 fa-solid fa-fish icon" id="iconob3.<?php echo $id?>"></i>
+                                    <i class="col-1 my-1 fa-solid fa-fish" id="iconob3.<?php echo $id?>"></i>
                                     <p class="col-10 my-0"><?php echo $category?></p>
                                 </div>
                                 <div class="col-12 mx-auto my-4">
@@ -513,15 +515,15 @@
         
                     carta.addEventListener('mouseenter', function(){
                         img.style.padding = "8%";
-                        a1.classList.add('text-light');
-                        b1.classList.add('text-light');
-                        c1.classList.add('text-light');
+                        a1.classList.add('icon');
+                        b1.classList.add('icon');
+                        c1.classList.add('icon');
                     });
                     carta.addEventListener('mouseleave', function(){
                         img.style.padding = "10%";
-                        a1.classList.remove('text-light');
-                        b1.classList.remove('text-light');
-                        c1.classList.remove('text-light');
+                        a1.classList.remove('icon');
+                        b1.classList.remove('icon');
+                        c1.classList.remove('icon');
                     });
                 }
         }

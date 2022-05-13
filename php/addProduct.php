@@ -7,19 +7,14 @@
     $category = $_POST['category'];
     $img = $_FILES['img']['name'];
     $title = $_POST['title'];
+    $keywords = $_POST['keywords'];
     $price = $_POST['price'];
     $pet = $_POST['pet'];
+    $units = $_POST['units'];
 
     // Genera un nombre aleatorio para reemplazar el del archivo
     $permittedChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $name = substr(str_shuffle($permittedChars), 0, 12);
-
-    // Verifica si se agregó una descripción 
-    if (!empty($_POST['description'])){
-      $description = $_POST['description'];
-    } else {
-      $description = "empty";
-    }
     
     // Verifica si se añadió una foto
     if (isset($img) && $img != "") {
@@ -50,9 +45,9 @@
       // Almacena la ruta en la que se guardará el archivo 
       $rute = "imgUploaded/$pet"."Products/$category/$name";
 
-      $loadItem = "INSERT INTO products (img, title, descrip, price, available, pet, category) values (?, ?, ?, ?, ?, ?, ?)";
+      $loadItem = "INSERT INTO products (img, title, keywords, price, units, pet, category) values (?, ?, ?, ?, ?, ?, ?)";
       $uploadItem = $pdo->prepare($loadItem);
-      $uploadItem->execute(array($rute, $title, $description, $price, 1, $pet, $category));
+      $uploadItem->execute(array($rute, $title, $keywords, $price, $units, $pet, $category));
       
       // Mueve el archivo a la ruta especificada
       move_uploaded_file($temp, $rute);

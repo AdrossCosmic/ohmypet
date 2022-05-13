@@ -208,8 +208,15 @@ h2{
     flex-direction: row;
     wrap: no-wrap !important;
     overflow: auto;
+    -webkit-box-shadow: 0px 15px 26px -15px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 15px 26px -15px rgba(0,0,0,0.75);
+    box-shadow: 0px 15px 26px -15px rgba(0,0,0,0.75);
 }
 
+.scroll-view::-webkit-scrollbar:vertical{
+    display: none;
+
+}
 .scroll-view::-webkit-scrollbar {
    background-color: var(--opaque);
    height: 8px;
@@ -223,6 +230,9 @@ h2{
 .search{
     border: solid 5px var(--color5);
     border-radius: 10px 10px 0 0;
+    -webkit-box-shadow: 0px 15px 26px -15px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 15px 26px -15px rgba(0,0,0,0.75);
+    box-shadow: 0px 15px 26px -15px rgba(0,0,0,0.75);
 }
 
 .searchInput{
@@ -324,7 +334,7 @@ h2{
     box-shadow: 0px 2px 2px 0px rgba(66,66,66,1);
 }
 
-.button-primary{
+.button-black{
     background: var(--primary);
     color: white;
     border: none;
@@ -362,9 +372,35 @@ h2{
     box-shadow: 0px 2px 7px 0px rgba(66,66,66,1);
 }
 
+.button-black:hover{
+    color: white;
+}
+
 .icon{
-    color: black;
-    transition: 0.2s;
+    animation: rainbow 3s;
+    animation-timing-funciont: ease-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rainbow {
+    0%{
+        color: black;
+    }
+    20%{
+        color: var(--color1);
+    }
+    40%{
+        color: var(--color2);
+    }
+    60%{
+        color: var(--color3);
+    }
+    80%{
+        color: var(--color4);
+    }
+    100%{
+        color: black;
+    }
 }
 
 
