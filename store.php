@@ -189,6 +189,9 @@
         <div class="items-container ">
             <div class="bg-light">
                 <h4 class="text-center py-3">Productos destacados</h4>
+
+                <!-- Sección: "Elementos destacados" -->
+
                 <div class="scroll-view">
 
                     <?php 
@@ -236,29 +239,29 @@
                             break;
                     } ?>
 
-                        <div class="col-4 item-store mx-auto <?php echo $category?>" id="item<?php echo $id?>">
-                            <div class="front bg-color<?php echo $color;?>" id="front<?php echo $id?>">
-                                <img class="img-fluid" src="php/<?php echo $img;?>" alt="" id="img<?php echo $id?>">
+                        <div class="col-4 item-store mx-auto <?php echo $category?>" id="item1.<?php echo $id?>">
+                            <div class="front bg-color<?php echo $color;?>" id="front1.<?php echo $id?>">
+                                <img class="img-fluid" src="php/<?php echo $img;?>" alt="" id="img1.<?php echo $id?>">
                                 <div class="d-flex flex-column justify-content-between" style="height: 35%;">
                                     <div class="mx-3 mt-2">
                                         <h5 class="cardTitle"><?php echo $title;?></h5>
                                         <h5><?php echo $price;?>/u</h5>
                                     </div>
                                     <div class="row ms-2 col-12">
-                                        <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc<?php echo $id?>"></i>
+                                        <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc1.<?php echo $id?>"></i>
                                         <p class="col-10 my-0"><?php echo $available;?></p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="back" id="back<?php echo $id?>">
+                            <div class="back" id="back1.<?php echo $id?>">
                                 <div class="mx-4">
                                     <h5><?php echo $title;?></h5>
                                     <h5><?php echo $price;?>/u</h5>
                                 </div>
                                 <div class="row mt-2 ms-2 col-12">
-                                    <i class="col-1 my-1 fa-solid fa-cat icon" id="iconoa<?php echo $id?>"></i>
+                                    <i class="col-1 my-1 fa-solid fa-cat icon" id="iconoa1.<?php echo $id?>"></i>
                                     <p class="col-10 my-0">Para <?php echo $pet;?>s</p>
-                                    <i class="col-1 my-1 fa-solid fa-fish icon" id="iconob<?php echo $id?>"></i>
+                                    <i class="col-1 my-1 fa-solid fa-fish icon" id="iconob1.<?php echo $id?>"></i>
                                     <p class="col-10 my-0"><?php echo $category?></p>
                                 </div>
                                 <div class="col-12 mx-auto my-4">
@@ -289,6 +292,9 @@
                         <input class="button button-color5 " type="submit" name="makeSearch" value="Buscar">
                     </form>    
                 </div>
+
+                <!-- Sección: "Búsqueda" -->
+
                 <div class="row col-10 mx-auto justify-content-center mt-3 m-0 <?php if  (isset($searchResult)){ echo "search";}?>" id="search">
 
                     <?php 
@@ -337,29 +343,29 @@
                                 
                             ?>
                                 
-                                <div class="col-4 item-store mx-auto <?php echo $category?>" id="item<?php echo $id?>">
-                                    <div class="front bg-color<?php echo $color;?>" id="front<?php echo $id?>">
-                                        <img class="img-fluid" src="php/<?php echo $img;?>" alt="" id="img<?php echo $id?>">
+                                <div class="col-4 item-store mx-auto item2 <?php echo $category?>" id="item2.<?php echo $id?>">
+                                    <div class="front bg-color<?php echo $color;?>" id="front2.<?php echo $id?>">
+                                        <img class="img-fluid" src="php/<?php echo $img;?>" alt="" id="img2.<?php echo $id?>">
                                         <div class="d-flex flex-column justify-content-between" style="height: 35%;">
                                             <div class="mx-3 mt-2">
                                                 <h5 class="cardTitle"><?php echo $title;?></h5>
                                                 <h5><?php echo $price;?>/u</h5>
                                             </div>
                                             <div class="row ms-2 col-12">
-                                                <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc<?php echo $id?>"></i>
+                                                <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc2.<?php echo $id?>"></i>
                                                 <p class="col-10 my-0"><?php echo $available;?></p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="back" id="back<?php echo $id?>">
+                                    <div class="back" id="back2.<?php echo $id?>">
                                         <div class="mx-4">
                                             <h5><?php echo $title;?></h5>
                                             <h5><?php echo $price;?>/u</h5>
                                         </div>
                                         <div class="row mt-2 ms-2 col-12">
-                                            <i class="col-1 my-1 fa-solid fa-cat icon" id="iconoa<?php echo $id?>"></i>
+                                            <i class="col-1 my-1 fa-solid fa-cat icon" id="iconoa2.<?php echo $id?>"></i>
                                             <p class="col-10 my-0">Para <?php echo $pet;?>s</p>
-                                            <i class="col-1 my-1 fa-solid fa-fish icon" id="iconob<?php echo $id?>"></i>
+                                            <i class="col-1 my-1 fa-solid fa-fish icon" id="iconob2.<?php echo $id?>"></i>
                                             <p class="col-10 my-0"><?php echo $category?></p>
                                         </div>
                                         <div class="col-12 mx-auto my-4">
@@ -371,6 +377,8 @@
                     <?php endforeach;}?>
 
                 </div>
+
+                <!-- Sección: "Todos los elementos" -->
 
                 <div class="row col-12 justify-content-center mt-3 m-0 " id="items">
 
@@ -416,29 +424,29 @@
                         
                     ?>
                         
-                        <div class="col-4 item-store mx-auto <?php echo $category?>" id="item<?php echo $id?>">
-                            <div class="front bg-color<?php echo $color;?>" id="front<?php echo $id?>">
-                                <img class="img-fluid" src="php/<?php echo $img;?>" alt="" id="img<?php echo $id?>">
+                        <div class="col-4 item-store mx-auto item3 <?php echo $category?>" id="item3.<?php echo $id?>">
+                            <div class="front bg-color<?php echo $color;?>" id="front3.<?php echo $id?>">
+                                <img class="img-fluid" src="php/<?php echo $img;?>" alt="" id="img3.<?php echo $id?>">
                                 <div class="d-flex flex-column justify-content-between" style="height: 35%;">
                                     <div class="mx-3 mt-2">
                                         <h5 class="cardTitle"><?php echo $title;?></h5>
                                         <h5><?php echo $price;?>/u</h5>
                                     </div>
                                     <div class="row ms-2 col-12">
-                                        <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc<?php echo $id?>"></i>
+                                        <i class="col-1 my-1 fa-solid fa-cart-plus icon" id="iconoc3.<?php echo $id?>"></i>
                                         <p class="col-10 my-0"><?php echo $available;?></p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="back" id="back<?php echo $id?>">
+                            <div class="back" id="back3.<?php echo $id?>">
                                 <div class="mx-4">
                                     <h5><?php echo $title;?></h5>
                                     <h5><?php echo $price;?>/u</h5>
                                 </div>
                                 <div class="row mt-2 ms-2 col-12">
-                                    <i class="col-1 my-1 fa-solid fa-cat icon" id="iconoa<?php echo $id?>"></i>
+                                    <i class="col-1 my-1 fa-solid fa-cat icon" id="iconoa3.<?php echo $id?>"></i>
                                     <p class="col-10 my-0">Para <?php echo $pet;?>s</p>
-                                    <i class="col-1 my-1 fa-solid fa-fish icon" id="iconob<?php echo $id?>"></i>
+                                    <i class="col-1 my-1 fa-solid fa-fish icon" id="iconob3.<?php echo $id?>"></i>
                                     <p class="col-10 my-0"><?php echo $category?></p>
                                 </div>
                                 <div class="col-12 mx-auto my-4">
@@ -449,46 +457,80 @@
 
                     <?php endforeach?>
 
-                    <script>
-            
-                        var carta = document.getElementById('item<?php echo $id?>');
-                        var front = document.getElementById('front<?php echo $id?>');
-                        var back = document.getElementById('back<?php echo $id?>');
-                        var img = document.getElementById('img<?php echo $id?>');
-                        var a1 = document.getElementById('iconoa<?php echo $id?>');
-                        var b1 = document.getElementById('iconob<?php echo $id?>');
-                        var c1 = document.getElementById('iconoc<?php echo $id?>');
-            
-                        front.addEventListener('click', function(){
-                            carta.style.transform = "rotateY(180deg)";
-                            console.log(<?php echo $id?>);
-                        });
-                        
-                        back.addEventListener('click', function(){
-                            carta.style.transform = "rotateY(0deg)";
-                            console.log(<?php echo $id?>);
-                        });
-            
-                        carta.addEventListener('mouseenter', function(){
-                            img.style.padding = "8%";
-                            a1.classList.add('text-light');
-                            b1.classList.add('text-light');
-                            c1.classList.add('text-light');
-                            console.log(<?php echo $id?>);
-                        });
-                        carta.addEventListener('mouseleave', function(){
-                            img.style.padding = "10%";
-                            a1.classList.remove('text-light');
-                            b1.classList.remove('text-light');
-                            c1.classList.remove('text-light');
-                            console.log(<?php echo $id?>);
-                        });
-            
-                    </script>
-
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Añade la animación a cada item -->
+
+    <script>
+
+        function addAnimation(x, i){
+                var carta = document.getElementById('item' + x + "." + i);
+                var thatExist = !!document.getElementById('item' + x + "." + i);
+                var front = document.getElementById('front' + x + "." + i);
+                var back = document.getElementById('back' + x + "." + i);
+                var img = document.getElementById('img' + x + "." + i);
+                var a1 = document.getElementById('iconoa' + x + "." + i);
+                var b1 = document.getElementById('iconob' + x + "." + i);
+                var c1 = document.getElementById('iconoc' + x + "." + i);
+                
+                if (thatExist == true){
+                    front.addEventListener('click', function(){
+                    carta.style.transform = "rotateY(180deg)";
+                    });
+                    
+                    back.addEventListener('click', function(){
+                        carta.style.transform = "rotateY(0deg)";
+                    });
+        
+                    carta.addEventListener('mouseenter', function(){
+                        img.style.padding = "8%";
+                        a1.classList.add('text-light');
+                        b1.classList.add('text-light');
+                        c1.classList.add('text-light');
+                    });
+                    carta.addEventListener('mouseleave', function(){
+                        img.style.padding = "10%";
+                        a1.classList.remove('text-light');
+                        b1.classList.remove('text-light');
+                        c1.classList.remove('text-light');
+                    });
+                }
+        }
+
+        // Almacena el id del primer item de la sección de Busqueda
+        var relevantSection = !!document.getElementsByClassName('item1');
+        var searchSection = !!document.getElementsByClassName('item2');
+        var allSection = !!document.getElementsByClassName('item3')
+        ;
+        // Almacena la cantidad de columnas que existen en la base de datos
+        var allItems = <?php echo $numberRows;?>;
+        var x = 1; 
+        console.log(x);
+
+        // Ejecuta la función addAnimation por cada item de la consulta
+        for (var i = 1; i <= allItems; i++) {
+            
+            if (x == i){
+                
+                // Ejecuta la función si se ha realizado una busqueda
+                if (searchSection == true){
+                    addAnimation(1,i);
+                }
+                // Ejecuta la función si se ha realizado una busqueda
+                if (searchSection == true){
+                    addAnimation(2,i);
+                }
+                // Ejecuta la función si la sección "Todos los items" es visible.
+                if (allSection == true){
+                    addAnimation(3,i);
+                }
+                x = x+1;
+            }
+        }
+        
+    </script>
 
     <?php include("footer.php");?>

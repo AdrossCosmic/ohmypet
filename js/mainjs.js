@@ -81,3 +81,4 @@ input5.addEventListener('click', function(){
 input6.addEventListener('click', function(){
     selected(6);
 });
+
