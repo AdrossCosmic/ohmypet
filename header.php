@@ -35,7 +35,7 @@
             <a class="nav-item nav-link" href="profile.php"><i class="fa-solid fa-user"></i></a>
             <div class="d-flex notify">
                 <a class="nav-item nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i></a>
-                <p class="my-auto ms-0 me-4"><?php echo "(" .$sumProducts .")";?></p>
+                <p class="my-auto ms-0 me-4"><?php if(isset($_SESSION['cart'])){ echo "(" .$sumProducts .")";};?></p>
             </div>
         </div>
     </nav>

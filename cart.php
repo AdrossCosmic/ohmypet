@@ -8,10 +8,10 @@
         $item = $_GET['item'];
         unset($cart[$item]);
         header("Location: cart.php");
+        $_SESSION['cart'] = $cart;
     }
 
     $sumPrice = 0;
-    $_SESSION['cart'] = $cart;
 
     ?>
     <!-- Contenedor -->
@@ -50,47 +50,46 @@
                 }
             */
 
-            foreach($cart as $item => $product):
+            if(isset($_SESSION['cart'])){
+                foreach($cart as $item => $product):
 
-            $allItems = request($product['id'], $pdo); ?>
-
-            <!-- Contenedor de cada item -->
-            <div class="col-11 mt-3 bg-color<?php echo $product['color'];?> row mx-auto">
-                
-            <?php 
-            
-            $last = end($product);
-
-            
-
-            foreach($allItems as $key){
-                
-                $id = $key['id'];
-                $title = $key['title'];
-                $price = $key['price'];
-                $img = $key['img']; ?>
-
-                <img class="my-1 px-1 col-2 img-fluid" src="php/<?php echo $img?>" alt="">
-                <div class="col-5">
-                    <h4 class="mt-4 col-10"><?php echo $title?></h4>
-                    <h5><?php echo $price?>/u</h5>
-                </div>
-                <div class="col-4">
-                    <h4 class="mt-4 col-11">Unidades: <?php echo $product['units']?></h4>
-                    <h5>Total: <?php $totalUnits = $price * $product['units']; echo $totalUnits?>/u</h5>
-                </div>
-                <div class="col-1">
-                    <a href="cart.php?item=<?php echo $item;?>" class="text-dark p-0"><i class="fa-solid fa-xmark ms-4 mt-3"></i></a>
-
-                </div>
-
-            <?php 
+                    $allItems = request($product['id'], $pdo); ?>
         
-                $sumPrice = $sumPrice + $totalUnits;} ?>
-
-            </div>
-
-            <?php endforeach;?>
+                    <!-- Contenedor de cada item -->
+                    <div class="col-11 mt-3 bg-color<?php echo $product['color'];?> row mx-auto">
+                        
+                    <?php 
+                    
+                    $last = end($product);
+        
+                    foreach($allItems as $key){
+                        
+                        $id = $key['id'];
+                        $title = $key['title'];
+                        $price = $key['price'];
+                        $img = $key['img']; ?>
+        
+                        <img class="my-1 px-1 col-2 img-fluid" src="php/<?php echo $img?>" alt="">
+                        <div class="col-5">
+                            <h4 class="mt-4 col-10"><?php echo $title?></h4>
+                            <h5><?php echo $price?>/u</h5>
+                        </div>
+                        <div class="col-4">
+                            <h4 class="mt-4 col-11">Unidades: <?php echo $product['units']?></h4>
+                            <h5>Total: <?php $totalUnits = $price * $product['units']; echo $totalUnits?>/u</h5>
+                        </div>
+                        <div class="col-1">
+                            <a href="cart.php?item=<?php echo $item;?>" class="text-dark p-0"><i class="fa-solid fa-xmark ms-4 mt-3"></i></a>
+        
+                        </div>
+        
+                    <?php 
+                
+                        $sumPrice = $sumPrice + $totalUnits;} ?>
+        
+                    </div>
+        
+                    <?php endforeach;}?>
         
         </div>
         

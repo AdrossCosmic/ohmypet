@@ -278,11 +278,11 @@ h2{
     border: var(--color2) solid 2px;
 }
 
-.Deporte{
+.Deporte:hover{
     border: var(--color3) solid 2px;
 }
 
-.Salud{
+.Salud:hover{
     border: var(--color4) solid 2px;
 }
 
