@@ -263,12 +263,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="back" id="back1.<?php echo $id?>">
+                            <div class="back">
                                 <div class="mx-4">
                                     <h5><?php echo $title;?></h5>
                                     <h5><?php echo $price;?>/u</h5>
                                 </div>
-                                <div class="row mt-2 ms-2 col-12">
+                                <div class="row mt-2 mb-3 ms-2 col-12">
                                     <i class="col-1 my-1 fa-solid fa-cat" id="iconoa1.<?php echo $id?>"></i>
                                     <p class="col-10 my-0">Para <?php echo $pet;?>s</p>
                                     <i class="col-1 my-1 fa-solid fa-fish" id="iconob1.<?php echo $id?>"></i>
@@ -276,14 +276,20 @@
                                 </div>
 
                                 <?php if ($available === "Disponible") {?>
-                                    <div class="row col-12 mx-auto my-4">
-                                        <a class="col-6 mx-auto text-center button button-color<?php echo $color;?>" href="">Add to cart</a>
+                                    <div class="col-12 mx-auto my-4">
+                                        <form action="php/addtocart.php" method="POST">
+                                            <input type="hidden" name="id" value="<?php echo $id?>">
+                                            <input type="hidden" name="color" value="<?php echo $color?>">
+                                            <input class="ms-2 input col-6" type="number" name="units" placeholder="0" min="1" max="<?php echo $units?>">
+                                            <input class="button button-color5"type="submit" name="add" value="Agregar">
+                                        </form>
                                     </div>
                                 <?php } ?>
 
                                 <?php ?>
-                                <div class="row mt-2 ms-0 col-12">
-                                    <a class="col-4 mx-auto text-center button button-color5" href="php/deleteProduct.php?id=<?php echo $id .'&img=' .$img;?>" ><i class="fa-solid fa-trash fa-2x"></i> Eliminar</a>
+                                <div class=" justify-content-center col-12">
+                                    <a class="ms-3 button button-color5" href="php/deleteProduct.php?id=<?php echo $id .'&img=' .$img;?>" ><i class="fa-solid fa-trash "></i> Eliminar</a>
+                                    <a class="ms-3 button button-color5" id="back1.<?php echo $id?>" > Volver</a>
                                 </div>
                                 
                                 <?php ?>

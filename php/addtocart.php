@@ -3,19 +3,19 @@
     session_start();
     require("db.php");
 
-    if(!empty($_GET['id'])){
+    if(isset($_POST['add'])){
 
-        $carrito_mio = $_SESSION['carrito'];
-        $id = $_GET['id'];
-        $carrito_mio[] = $id;
+        $id = $_POST['id'];
+        $units = $_POST['units'];
+        $color = $_POST['color'];
+        
+        $cart = $_SESSION['cart'];
+        
+        $cart[] = array("id" => $id, "units" => $units, "color" => $color);
         
     }
 
-    if(isset($_POST['buy'])){
-        $_SESSION['carrito'] = 0;
-    }
-
-    $_SESSION['carrito'] = $carrito_mio;
+    $_SESSION['cart'] = $cart;
     header("Location: " .$_SERVER['HTTP_REFERER']."");
 
 

@@ -1,4 +1,16 @@
 
+    <?php 
+    
+        if(isset($_SESSION['cart'])){
+            $cart = $_SESSION['cart'];
+            $sumProducts = count($cart);
+        }
+
+    
+    
+    
+    ?>
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +35,7 @@
             <a class="nav-item nav-link" href="profile.php"><i class="fa-solid fa-user"></i></a>
             <div class="d-flex notify">
                 <a class="nav-item nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i></a>
-                <p class="my-auto ms-0 me-4"></p>
+                <p class="my-auto ms-0 me-4"><?php echo "(" .$sumProducts .")";?></p>
             </div>
         </div>
     </nav>
