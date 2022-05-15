@@ -10,7 +10,7 @@
         <section class="col-12 index">
             <div class="row col-12 m-0">
                 <div class="col-8 p-0 d-flex"> 
-                    <h2 class="mx-auto my-auto">Nombre de la página</h2>
+                    <h2 class="mx-auto my-auto">OhmyPet</h2>
                 </div>
                 <div class="col-4 p-0">
                     <img class="img-fluid" src="img/index2.png" alt="">
