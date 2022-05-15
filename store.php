@@ -9,6 +9,17 @@
         include("header.php"); 
         require('php/db.php');
 
+        if(isset($_SESSION['loggedin'])){
+
+            $admin = $_SESSION['itsAdmin'];
+            $loggedin = $_SESSION['loggedin'];
+
+        } else {
+
+            $admin = false;
+            $loggedin = false;
+        }
+
 
         // Selecciona el último id de la tabla, para usarlo posteriormente con js
         $requestLastElement = "SELECT id FROM products ORDER BY id DESC LIMIT 1";
@@ -133,65 +144,69 @@
         
     ?>
 
-    <div class="addProducts">
-        <i class="fa-solid fa-circle-plus fa-4x" data-bs-toggle="modal" data-bs-target="#addProduct"></i>
-    </div>
 
-    <!-- Modal -->
-
-    <div class="modal fade" id="addProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Agregar Producto</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <?php if ($admin == true){ ?>
+        <div class="addProducts">
+            <i class="fa-solid fa-circle-plus fa-4x" data-bs-toggle="modal" data-bs-target="#addProduct"></i>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="addProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Agregar Producto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="php/addProduct.php" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body col-12">
+                            <input class="col-12" type="file" name="img" placeholder="Agregue una imagen de su producto">
+                            <input class="col-12 input" type="text" name="title" placeholder="Agergar el nombre de tu producto">
+                            <input class="col-12 input" type="text" name="keywords" placeholder="Agregue palabras claves facilitar la busqueda de su producto">
+                            <input class="col-12 input" type="number" name="price" placeholder="Agregue el costo de su producto por unidad" id="priceInput">
+                            <input class="col-12 input" type="number" name="units" placeholder="Unidades disponibles">
+                            <h5 class="mt-3">Seleccione la categoría de su producto</h5>
+                            <div class="row col-12">
+                                <div class="col-2 me-4">
+                                    <input class="radioInput" type="radio" name="category" value="Accesorios" id="category1">
+                                    <label class="labelRadioInput" for="category1" id="labelCategory1">Accesorios</label>
+                                </div>
+                                <div class="col-2 ms-3">
+                                    <input class="radioInput" type="radio" name="category" value="Alimento" id="category2">
+                                    <label class="labelRadioInput" for="category2" id="labelCategory2">Alimento</label>
+                                </div>
+                                <div class="col-2 ms-4">
+                                    <input class="radioInput" type="radio" name="category" value="Deporte" id="category3">
+                                    <label class="labelRadioInput" for="category3" id="labelCategory3">Deporte</label>
+                                </div>
+                                <div class="col-2 ms-3">
+                                    <input class="radioInput" type="radio" name="category" value="Salud" id="category4">
+                                    <label class="labelRadioInput" for="category4" id="labelCategory4">Salud</label>
+                                </div>
+                            </div>
+                            <h5 class="mt-4">¿A quién está enfocado su producto?</h5>
+                            <div class="row col-12">
+                                <div class="col-2 me-2">
+                                    <input class="radioInput" type="radio" name="pet" value="Gato" id="pet1">
+                                    <label class="labelRadioInput" for="pet1" id="labelPet1">Gatos</label>
+                                </div>
+                                <div class="col-2 ms-0">
+                                    <input class="radioInput" type="radio" name="pet" value="Perro" id="pet2">
+                                    <label class="labelRadioInput" for="pet2" id="labelPet2">Perros</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="button button-color2" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <input class="button button-color4" type="submit" name="send" value="Agregar">
+                        </div>
+                    </form>
                 </div>
-                <form action="php/addProduct.php" method="POST" enctype="multipart/form-data">
-                    <div class="modal-body col-12">
-                        <input class="col-12" type="file" name="img" placeholder="Agregue una imagen de su producto">
-                        <input class="col-12 input" type="text" name="title" placeholder="Agergar el nombre de tu producto">
-                        <input class="col-12 input" type="text" name="keywords" placeholder="Agregue palabras claves facilitar la busqueda de su producto">
-                        <input class="col-12 input" type="number" name="price" placeholder="Agregue el costo de su producto por unidad" id="priceInput">
-                        <input class="col-12 input" type="number" name="units" placeholder="Unidades disponibles">
-                        <h5 class="mt-3">Seleccione la categoría de su producto</h5>
-                        <div class="row col-12">
-                            <div class="col-2 me-4">
-                                <input class="radioInput" type="radio" name="category" value="Accesorios" id="category1">
-                                <label class="labelRadioInput" for="category1" id="labelCategory1">Accesorios</label>
-                            </div>
-                            <div class="col-2 ms-4">
-                                <input class="radioInput" type="radio" name="category" value="Alimento" id="category2">
-                                <label class="labelRadioInput" for="category2" id="labelCategory2">Alimento</label>
-                            </div>
-                            <div class="col-2 ms-4">
-                                <input class="radioInput" type="radio" name="category" value="Deporte" id="category3">
-                                <label class="labelRadioInput" for="category3" id="labelCategory3">Deporte</label>
-                            </div>
-                            <div class="col-2 ms-4">
-                                <input class="radioInput" type="radio" name="category" value="Salud" id="category4">
-                                <label class="labelRadioInput" for="category4" id="labelCategory4">Salud</label>
-                            </div>
-                        </div>
-                        <h5 class="mt-4">¿A quién está enfocado su producto?</h5>
-                        <div class="row col-12">
-                            <div class="col-2 me-2">
-                                <input class="radioInput" type="radio" name="pet" value="Gato" id="pet1">
-                                <label class="labelRadioInput" for="pet1" id="labelPet1">Gatos</label>
-                            </div>
-                            <div class="col-2">
-                                <input class="radioInput" type="radio" name="pet" value="Perro" id="pet2">
-                                <label class="labelRadioInput" for="pet2" id="labelPet2">Perros</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <input type="submit" name="send" value="Agregar">
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
+
+    <?php }?>
 
     <section class="col-12 store">
         <div class="items-container ">
@@ -275,25 +290,28 @@
                                     <p class="col-10 my-0"><?php echo $category?></p>
                                 </div>
 
-                                <?php if ($available === "Disponible") {?>
-                                    <div class="col-12 mx-auto my-4">
-                                        <form action="php/addtocart.php" method="POST">
-                                            <input type="hidden" name="id" value="<?php echo $id?>">
-                                            <input type="hidden" name="color" value="<?php echo $color?>">
-                                            <input class="ms-2 input col-6" type="number" name="units" placeholder="0" min="1" max="<?php echo $units?>">
-                                            <input class="button button-color5"type="submit" name="add" value="Agregar">
-                                        </form>
-                                    </div>
-                                <?php } ?>
+                                <?php 
+                                    if ($loggedin == true){ 
+                                        if ($available === "Disponible"){?>
+                                        <div class="col-12 mx-auto my-4">
+                                            <form action="php/addtocart.php" method="POST">
+                                                <input type="hidden" name="id" value="<?php echo $id?>">
+                                                <input type="hidden" name="color" value="<?php echo $color?>">
+                                                <input class="ms-2 input col-6" type="number" name="units" placeholder="0" min="1" max="<?php echo $units?>" required>
+                                                <input class="button button-color5"type="submit" name="add" value="Agregar">
+                                            </form>
+                                        </div>
+                                <?php }} ?>
 
-                                <?php ?>
                                 <div class=" justify-content-center col-12">
-                                    <a class="ms-3 button button-color5" href="php/deleteProduct.php?id=<?php echo $id .'&img=' .$img;?>" ><i class="fa-solid fa-trash "></i> Eliminar</a>
-                                    <a class="ms-3 button button-color5" id="back1.<?php echo $id?>" > Volver</a>
+                                    <?php if($admin == true){?>
+                                        <a class="ms-3 button button-color5" href="php/deleteProduct.php?id=<?php echo $id .'&img=' .$img;?>" ><i class="fa-solid fa-trash "></i> Eliminar</a>
+                                    <?php } ?>
+                                    <a class="ms-3 button button-color5" id="back1.<?php echo $id?>" >Volver</a>
+                                    <?php if($loggedin == false){?>
+                                    <p class="text-center mt-5">Debes <a href="login.php">iniciar sesión</a> antes de comprar</p>      
+                                    <?php } ?>
                                 </div>
-                                
-                                <?php ?>
-
                             </div>
                         </div> 
                     
@@ -371,36 +389,56 @@
                                 
                             ?>
                                 
-                                <div class="col-4 item-store mx-auto item2 <?php echo $category?>" id="item2.<?php echo $id?>">
-                                    <div class="front bg-color<?php echo $color;?>" id="front2.<?php echo $id?>">
-                                        <img class="img-fluid" src="php/<?php echo $img;?>" alt="" id="img2.<?php echo $id?>">
-                                        <div class="d-flex flex-column justify-content-between" style="height: 35%;">
-                                            <div class="mx-3 mt-2">
-                                                <h5 class="cardTitle"><?php echo $title;?></h5>
-                                                <h5><?php echo $price;?>/u</h5>
-                                            </div>
-                                            <div class="row ms-2 col-12">
-                                                <i class="col-1 my-1 fa-solid fa-cart-plus" id="iconoc2.<?php echo $id?>"></i>
-                                                <p class="col-10 my-0"><?php echo $available;?></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="back" id="back2.<?php echo $id?>">
-                                        <div class="mx-4">
-                                            <h5><?php echo $title;?></h5>
+                            <div class="col-4 item-store mx-auto item2 <?php echo $category?>" id="item2.<?php echo $id?>">
+                                <div class="front bg-color<?php echo $color;?>" id="front2.<?php echo $id?>">
+                                    <img class="img-fluid" src="php/<?php echo $img;?>" alt="" id="img2.<?php echo $id?>">
+                                    <div class="d-flex flex-column justify-content-between" style="height: 35%;">
+                                        <div class="mx-3 mt-2">
+                                            <h5 class="cardTitle"><?php echo $title;?></h5>
                                             <h5><?php echo $price;?>/u</h5>
                                         </div>
-                                        <div class="row mt-2 ms-2 col-12">
-                                            <i class="col-1 my-1 fa-solid fa-cat" id="iconoa2.<?php echo $id?>"></i>
-                                            <p class="col-10 my-0">Para <?php echo $pet;?>s</p>
-                                            <i class="col-1 my-1 fa-solid fa-fish" id="iconob2.<?php echo $id?>"></i>
-                                            <p class="col-10 my-0"><?php echo $category?></p>
-                                        </div>
-                                        <div class="col-12 mx-auto my-4">
-                                            <a class="mx-5 button button-color<?php echo $color;?>" href="">Add to cart</a>
+                                        <div class="row ms-2 col-12">
+                                            <i class="col-1 my-1 fa-solid fa-cart-plus" id="iconoc2.<?php echo $id?>"></i>
+                                            <p class="col-10 my-0"><?php echo $available ." (" .$units .")";?></p>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="back">
+                                    <div class="mx-4">
+                                        <h5><?php echo $title;?></h5>
+                                        <h5><?php echo $price;?>/u</h5>
+                                    </div>
+                                    <div class="row mt-2 mb-3 ms-2 col-12">
+                                        <i class="col-1 my-1 fa-solid fa-cat" id="iconoa2.<?php echo $id?>"></i>
+                                        <p class="col-10 my-0">Para <?php echo $pet;?>s</p>
+                                        <i class="col-1 my-1 fa-solid fa-fish" id="iconob2.<?php echo $id?>"></i>
+                                        <p class="col-10 my-0"><?php echo $category?></p>
+                                    </div>
+
+                                    <?php 
+                                        if ($loggedin == true){ 
+                                            if ($available === "Disponible"){?>
+                                            <div class="col-12 mx-auto my-4">
+                                                <form action="php/addtocart.php" method="POST">
+                                                    <input type="hidden" name="id" value="<?php echo $id?>">
+                                                    <input type="hidden" name="color" value="<?php echo $color?>">
+                                                    <input class="ms-2 input col-6" type="number" name="units" placeholder="0" min="1" max="<?php echo $units?>" required>
+                                                    <input class="button button-color5"type="submit" name="add" value="Agregar">
+                                                </form>
+                                            </div>
+                                    <?php }} ?>
+
+                                    <div class=" justify-content-center col-12">
+                                        <?php if($admin == true){?>
+                                            <a class="ms-3 button button-color5" href="php/deleteProduct.php?id=<?php echo $id .'&img=' .$img;?>" ><i class="fa-solid fa-trash "></i> Eliminar</a>
+                                        <?php } ?>
+                                        <a class="ms-3 button button-color5" id="back2.<?php echo $id?>" > Volver</a>
+                                        <?php if($loggedin == false){?>
+                                        <p class="text-center mt-5">Debes <a href="login.php">iniciar sesión</a> antes de comprar</p>      
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
         
                     <?php endforeach;}?>
 
@@ -461,23 +499,43 @@
                                     </div>
                                     <div class="row ms-2 col-12">
                                         <i class="col-1 my-1 fa-solid fa-cart-plus" id="iconoc3.<?php echo $id?>"></i>
-                                        <p class="col-10 my-0"><?php echo $available;?></p>
+                                        <p class="col-10 my-0"><?php echo $available ." (" .$units .")";?></p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="back" id="back3.<?php echo $id?>">
+                            <div class="back">
                                 <div class="mx-4">
                                     <h5><?php echo $title;?></h5>
                                     <h5><?php echo $price;?>/u</h5>
                                 </div>
-                                <div class="row mt-2 ms-2 col-12">
+                                <div class="row mt-2 mb-3 ms-2 col-12">
                                     <i class="col-1 my-1 fa-solid fa-cat" id="iconoa3.<?php echo $id?>"></i>
                                     <p class="col-10 my-0">Para <?php echo $pet;?>s</p>
                                     <i class="col-1 my-1 fa-solid fa-fish" id="iconob3.<?php echo $id?>"></i>
                                     <p class="col-10 my-0"><?php echo $category?></p>
                                 </div>
-                                <div class="col-12 mx-auto my-4">
-                                    <a class="mx-5 button button-color<?php echo $color;?>" href="">Add to cart</a>
+
+                                <?php 
+                                    if ($loggedin == true){ 
+                                        if ($available === "Disponible"){?>
+                                        <div class="col-12 mx-auto my-4">
+                                            <form action="php/addtocart.php" method="POST">
+                                                <input type="hidden" name="id" value="<?php echo $id?>">
+                                                <input type="hidden" name="color" value="<?php echo $color?>">
+                                                <input class="ms-2 input col-6" type="number" name="units" placeholder="0" min="1" max="<?php echo $units?>" required>
+                                                <input class="button button-color5"type="submit" name="add" value="Agregar">
+                                            </form>
+                                        </div>
+                                <?php }} ?>
+
+                                <div class=" justify-content-center col-12">
+                                    <?php if($admin == true){?>
+                                        <a class="ms-3 button button-color5" href="php/deleteProduct.php?id=<?php echo $id .'&img=' .$img;?>" ><i class="fa-solid fa-trash "></i> Eliminar</a>
+                                    <?php } ?>
+                                    <a class="ms-3 button button-color5" id="back3.<?php echo $id?>" >Volver</a>
+                                    <?php if($loggedin == false){?>
+                                    <p class="text-center mt-5">Debes <a href="login.php">iniciar sesión</a> antes de comprar</p>      
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

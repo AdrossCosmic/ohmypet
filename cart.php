@@ -4,6 +4,10 @@
     require ("php/db.php");
     include ("header.php");
 
+    if(!isset($_SESSION['loggedin'])){
+        header("Location: login.php");
+    }
+
     if(isset($_GET['item'])){
         $item = $_GET['item'];
         unset($cart[$item]);

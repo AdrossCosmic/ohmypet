@@ -2,6 +2,10 @@
 
   session_start(); require("db.php");
 
+  if(!isset($_SESSION['loggedin'])){
+    header("Location: login.php");
+  }
+
   if (isset($_POST["send"])) {
 
     $category = $_POST['category'];

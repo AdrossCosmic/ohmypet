@@ -152,11 +152,11 @@ h2{
 .addProducts {
     z-index: 2;
     position: fixed;
-    margin: 30% 0 2% 2%; 
+    margin: 65vh 0 2% 2%; 
     transition: 0.2s;
 }
 
-.addProducts i:hover{
+.addProducts > i:hover{
     cursor: pointer;
     -webkit-box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
     -moz-box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
@@ -167,7 +167,7 @@ h2{
 .input{
     height: 50px;
     padding: 5px 15px;
-    margin: 10px auto;
+    margin: 10px 0;
     border: none;
     border-bottom: solid 3px var(--color3);
     transition: 0.5s;
@@ -264,7 +264,6 @@ h2{
 
 
 .item-store:hover{
-    cursor: pointer;
     -webkit-box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
     -moz-box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
     box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
@@ -286,9 +285,8 @@ h2{
     border: var(--color4) solid 2px;
 }
 
-
 .front, .back{
-	width: 100%;
+    width: 100%;
 	height: 100%;
 	position: absolute;
     -webkit-backface-visibility: hidden;
@@ -296,6 +294,9 @@ h2{
     border-radius: 10px 10px 0 0;
 }
 
+.front {
+    cursor: pointer;
+}
 
 .back{
     display: flex;
@@ -324,6 +325,7 @@ h2{
 }
 
 .button{
+    cursor: pointer;
     color: black;
     text-decoration: none;
     padding: 10px;

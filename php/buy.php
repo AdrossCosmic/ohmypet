@@ -3,6 +3,10 @@
     session_start();
     require("db.php");
 
+    if(!isset($_SESSION['loggedin'])){
+        header("Location: login.php");
+    }
+
     $cart = $_SESSION['cart'];
 
     
