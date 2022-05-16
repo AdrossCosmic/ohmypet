@@ -6,6 +6,7 @@
     <?php 
     
         session_start(); 
+        $_SESSION['pageActive'] = "store";
         include("header.php"); 
         require('php/db.php');
 
@@ -358,6 +359,7 @@
                                 $title = $i['title'];
                                 $price = $i['price'];
                                 $pet = $i['pet'];
+                                $units = $i['units'];
                                 $category = $i['category'];
                                 $color = 0;
                                 
@@ -458,6 +460,7 @@
                         $title = $i['title'];
                         $price = $i['price'];
                         $pet = $i['pet'];
+                        $units = $i['units'];
                         $category = $i['category'];
                         $color = 0;
                         

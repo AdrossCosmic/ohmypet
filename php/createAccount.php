@@ -29,7 +29,7 @@
             // Si las contraseñas coinciden
             if($password === $passwordConfirm){
 
-                $prepareAccount = "INSERT INTO users (name, lastname, email, username, password, itsAdmin) VALUES (?,?,?,?,?)";
+                $prepareAccount = "INSERT INTO users (name, lastname, email, username, password, itsAdmin) VALUES (?,?,?,?,?,?)";
                 $createAccount = $pdo->prepare($prepareAccount);
                 $createAccount->execute(array($name, $lastName, $email, $username, $password, 0));
 

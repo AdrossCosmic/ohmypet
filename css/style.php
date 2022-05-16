@@ -4,6 +4,9 @@
 ?>
 
 
+
+ /***** Estilos Generales *****/
+
 :root {
     --primary: #2A2A2A;
     --secondary: #363636; 
@@ -40,6 +43,76 @@
     background-color: var(--color5);
 }
 
+.button{
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    background: var(--color3);
+    transition: 0.5s ease;
+    -webkit-box-shadow: 0px 2px 2px 0px rgba(66,66,66,1);
+    -moz-box-shadow: 0px 2px 2px 0px rgba(66,66,66,1);
+    box-shadow: 0px 2px 2px 0px rgba(66,66,66,1);
+}
+
+.button-black{
+    background: var(--primary);
+    color: white;
+    border: none;
+}
+.button-color1{
+    background: var(--color1);
+    color: black;
+    border: none;
+}
+.button-color2{
+    background: var(--color2);
+    color: black;
+    border: none;
+}
+.button-color3{
+    background: var(--color3);
+    color: black;
+    border: none;
+}
+.button-color4{
+    background: var(--color4);
+    color: black;
+    border: none;
+}
+.button-color5{
+    background: var(--color5);
+    color: black;
+    border: none;
+}
+
+.Accesorios:hover{
+    border: var(--color1) solid 2px;
+}
+
+.Alimento:hover{
+    border: var(--color2) solid 2px;
+}
+
+.Deporte:hover{
+    border: var(--color3) solid 2px;
+}
+
+.Salud:hover{
+    border: var(--color4) solid 2px;
+}
+
+.button:hover{
+    color: black;
+    -webkit-box-shadow: 0px 2px 7px 0px rgba(66,66,66,1);
+    -moz-box-shadow: 0px 2px 7px 0px rgba(66,66,66,1);
+    box-shadow: 0px 2px 7px 0px rgba(66,66,66,1);
+}
+
+.button-black:hover{
+    color: white;
+}
+
 body {
     scroll-behavior: smooth;
     background-image: url("../img/background.png");
@@ -64,6 +137,9 @@ h5, h4, h3, h2, h1 {
 }
 
 
+
+/***** Navbar *****/
+
 .header {
     height: 20vh;
     background: #fff;
@@ -71,6 +147,7 @@ h5, h4, h3, h2, h1 {
 
 .nav-item {
     color: var(--opaque); 
+    transition: 0.2s;
 }
 
 .nav-item:hover{
@@ -80,20 +157,15 @@ h5, h4, h3, h2, h1 {
 
 .active {
     font-weight: 500;
-    color: var(--primary);
-}
-
-.notify p{
-    font-family: 'Rancho', cursive;
-    color: var(--secondary);
+    font-size: 1.1rem;
+    color: var(--color5);
 }
 
 
 
 
-.index div:first-child{
-    height: 70vh;
-}
+/***** Index *****/
+
 
 h2{
     animation: img-index 1s;
@@ -103,11 +175,19 @@ h2{
     transform: translateY(0);
 }
 
-.index div img {
-    padding-right: 10% !important;
-    margin-top: 10vh;
-    display: inline-block;
-    animation: img-index 1s;
+.img1 {
+
+    animation: img-index 2s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards; 
+    transform: translateY(0);
+    opacity: 0%;
+}
+
+.img2 {
+
+    animation: img-index 2s;
+    animation-delay: 0.8s;
     animation-fill-mode: forwards; 
     transform: translateY(0);
     opacity: 0%;
@@ -125,16 +205,14 @@ h2{
     }
 }
 
-
-
 .separador {
-    border-bottom: var(--primary) solid 1.2px;
-    width: 10%;
+    border-bottom: var(--primary) solid 2px;
+    border-radius: 50px;
     animation: separador 2s;
     animation-fill-mode: forwards;
-    animation-delay: 0.8s;
+    animation-delay: 1s;
     opacity: 0%; 
-    margin: 2% 0;
+    margin: 10% 0;
 }
 
 @keyframes separador {
@@ -148,6 +226,30 @@ h2{
     }
 }
 
+.ofert {
+
+    animation: ofert 2s;
+    animation-delay: 0.8s;
+    animation-fill-mode: forwards; 
+    transform: translateX(0);
+    opacity: 0%;
+}
+
+@keyframes ofert{
+    0%{
+        transform: translateX(-110px);
+        opacity: 0%;
+        display: none;
+    }
+    100%{
+        transform: translateX(0);
+        opacity: 100%;
+    }
+}
+
+
+
+/***** Store *****/
 
 .addProducts {
     z-index: 2;
@@ -158,50 +260,11 @@ h2{
 
 .addProducts > i:hover{
     cursor: pointer;
-    -webkit-box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
-    -moz-box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
-    box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
-
-}
-
-.input{
-    height: 50px;
-    padding: 5px 15px;
-    margin: 10px 0;
-    border: none;
-    border-bottom: solid 3px var(--color3);
-    transition: 0.5s;
-    outline: #00000000;
-}
-
-.labelRadioInput{
-    z-index: 2;
-    background: var(--opaque);
-    padding: 5px 10px;
-    border: solid 2px #00000000;
-    border-radius: 5px;
-    transition: 0.5s;
-}
-
-.radioInput{
-    z-index: 0 !important;
-    position: absolute;
-    display: none;
-}
-
-.selected{
-    border-color: var(--color1);
-    background: var(--color2);
-
-}
-
-.input:focus{
-    border-color: var(--color5) !important;
 }
 
 .scroll-view{
     width: 100%;
-    height: 72vh;
+    height: auto;
     -webkit-perspective: 800;
 	perspective: 800;
     display: flex;
@@ -248,6 +311,9 @@ h2{
 }
 
 
+
+/***** Productos de la tienda *****/
+
 .item-store {
     width: 14rem;
     height: 22rem;
@@ -263,26 +329,10 @@ h2{
 }
 
 
-.item-store:hover{
+.item-store:hover, .form{
     -webkit-box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
     -moz-box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
     box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
-}
-
-.Accesorios:hover{
-    border: var(--color1) solid 2px;
-}
-
-.Alimento:hover{
-    border: var(--color2) solid 2px;
-}
-
-.Deporte:hover{
-    border: var(--color3) solid 2px;
-}
-
-.Salud:hover{
-    border: var(--color4) solid 2px;
 }
 
 .front, .back{
@@ -306,10 +356,6 @@ h2{
 	transform: rotateY(180deg);
 }
 
-.description{
-
-}
-
 .item-store img{
     padding: 10%;
     background: white;
@@ -318,65 +364,6 @@ h2{
     transition: 0.2s;
 }
 
-.cardTitle{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.button{
-    cursor: pointer;
-    color: black;
-    text-decoration: none;
-    padding: 10px;
-    background: var(--color3);
-    transition: 0.5s ease;
-    -webkit-box-shadow: 0px 2px 2px 0px rgba(66,66,66,1);
-    -moz-box-shadow: 0px 2px 2px 0px rgba(66,66,66,1);
-    box-shadow: 0px 2px 2px 0px rgba(66,66,66,1);
-}
-
-.button-black{
-    background: var(--primary);
-    color: white;
-    border: none;
-}
-.button-color1{
-    background: var(--color1);
-    color: black;
-    border: none;
-}
-.button-color2{
-    background: var(--color2);
-    color: black;
-    border: none;
-}
-.button-color3{
-    background: var(--color3);
-    color: black;
-    border: none;
-}
-.button-color4{
-    background: var(--color4);
-    color: black;
-    border: none;
-}
-.button-color5{
-    background: var(--color5);
-    color: black;
-    border: none;
-}
-
-.button:hover{
-    color: black;
-    -webkit-box-shadow: 0px 2px 7px 0px rgba(66,66,66,1);
-    -moz-box-shadow: 0px 2px 7px 0px rgba(66,66,66,1);
-    box-shadow: 0px 2px 7px 0px rgba(66,66,66,1);
-}
-
-.button-black:hover{
-    color: white;
-}
 
 .icon{
     animation: rainbow 3s;
@@ -406,4 +393,59 @@ h2{
 }
 
 
-    
+/***** Formulario *****/
+
+.input{
+    height: 50px;
+    padding: 5px 15px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: solid 3px var(--color3);
+    transition: 0.5s;
+    outline: #00000000;
+}
+
+.labelRadioInput{
+    z-index: 2;
+    background: var(--opaque);
+    padding: 5px 10px;
+    border: solid 2px #00000000;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+.radioInput{
+    z-index: 0 !important;
+    position: absolute;
+    display: none;
+}
+
+.selected{
+    border-color: var(--color1);
+    background: var(--color2);
+
+}
+
+.input:focus{
+    border-color: var(--color5) !important;
+}
+
+/***** Cart *****/
+
+.cardTitle{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cartItem{
+    transition: 0.2s;
+    border: var(--opaque) solid 2px;
+    border-radius: 10px 10px 0 0;
+}
+
+.cartItem:hover{
+    -webkit-box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
+    -moz-box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
+    box-shadow: 0px 16px 37px -14px rgba(42,42,42,0.56);
+}

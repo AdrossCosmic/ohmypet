@@ -6,9 +6,6 @@
             $sumProducts = count($cart);
         }
 
-    
-    
-    
     ?>
     
     <meta charset="UTF-8">
@@ -23,18 +20,18 @@
 <body>
 
     <nav class="navbar header navbar-light">
-        <div class="d-flex justify-content-center">
-            <a class="ms-3 navbar-brand" href="#">Navbar</a>
+        <div class="navbar-brand">
+            <a href="index.php"><img class="ms-3 img-fluid" src="img/logo.png" alt="" width="120"></a>
         </div>
         <div class="d-flex justify-content-center">
-            <a class="nav-item nav-link" aria-current="page" href="index.php">Inicio</a>
-            <a class="nav-item nav-link" href="contact.php">Contacto</a>
-            <a class="nav-item nav-link" href="store.php">Tienda</a>
+            <a class="nav-item nav-link my-auto <?php if($_SESSION['pageActive'] === "index"){echo "active";}?>" aria-current="page" href="index.php">Inicio</a>
+            <a class="nav-item nav-link my-auto <?php if($_SESSION['pageActive'] === "contact"){echo "active";}?>" href="contact.php">Contacto</a>
+            <a class="nav-item nav-link my-auto <?php if($_SESSION['pageActive'] === "store"){echo "active";}?>" href="store.php">Tienda</a>
         </div>
         <div class="d-flex justify-content-center">
-            <a class="nav-item nav-link" href="profile.php"><i class="fa-solid fa-user"></i></a>
+            <a class="nav-item nav-link <?php if($_SESSION['pageActive'] === "profile"){echo "active";}?>" href="profile.php"><i class="fa-solid fa-user"></i></a>
             <div class="d-flex notify">
-                <a class="nav-item nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a class="nav-item nav-link <?php if($_SESSION['pageActive'] === "cart"){echo "active";}?>" href="cart.php"><i class="fa-solid fa-cart-shopping"></i></a>
                 <p class="my-auto ms-0 me-4"><?php if(isset($_SESSION['cart'])){ echo "(" .$sumProducts .")";};?></p>
             </div>
         </div>

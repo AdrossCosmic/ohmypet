@@ -1,12 +1,13 @@
 <?php
 
     session_start();
-    require ("php/db.php");
+    $_SESSION['pageActive'] = "profile";
     include ("header.php");
+    require ("php/db.php");
 
 ?>
 
-    <section class="col-4 my-5 bg-light mx-auto">
+    <section class="col-sm-10 col-md-6 my-5 bg-light mx-auto form">
         <div class="col-10 mx-auto d-flex flex-column justify-content-center">
             <h4 class="pt-3 text-center">Iniciar sesión</h4>
             <form action="php/login.php" method="POST">
@@ -16,7 +17,7 @@
             </form>
         </div>
         <div class="col-12">
-            <p class="mx-3 py-3">¿Aún no tienes una cuenta? Registrate <a href="" data-bs-toggle="modal" data-bs-target="#register">aquí</a></p>
+            <p class="ms-4 py-3">¿Aún no tienes una cuenta? Registrate <a href="" data-bs-toggle="modal" data-bs-target="#register">aquí</a></p>
         </div>
     </section>  
 
